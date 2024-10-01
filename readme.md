@@ -83,7 +83,7 @@ Untuk menggunakan fitur QR CODE SCANNER Anda perlu menambahkan script berikut di
 ```
 /ip hotspot walled-garden ip
 
-add action=accept comment="QR Code Scanner" disabled=no dst-host=j1bril99.github.io
+add action=accept comment="QR Code Scanner" disabled=no dst-host=jibri199.github.io
 
 ```
 Centang HTTP PAP di hotspot server profile.
