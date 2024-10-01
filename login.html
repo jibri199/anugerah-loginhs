@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title id="title"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="theme-color" content="#3B5998" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    $(if chap-id)
+        <form name="sendin" action="$(link-login-only)" method="post">
+            <input type="hidden" name="username" />
+            <input type="hidden" name="password" />
+            <input type="hidden" name="dst" value="$(link-orig)" />
+            <input type="hidden" name="popup" value="true" />
+        </form>
+
+        <script type="text/javascript" src="md5.js"></script>
+        <script type="text/javascript">
+            function doLogin() {
+                document.sendin.username.value = document.login.username.value;
+                document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value +
+                    '$(chap-challenge)');
+                document.sendin.submit();
+                return false;
+            }
+        </script>
+    $(endif)
+
+        <div id="main" class="main">
+            <div class="box">
+                <img src="idul.png" alt="Logo" style="width:100%; height:auto;"/>
+            </div>
+            <div class="box">
+                <h3 class="brand">Anugerah.Net</h3>
+            </div>
+                <div class="box">
+                    <button id="btnvrc" class="small-button" onclick="voucher();"><i class="icon icon-ticket">&#xe802;</i> Voucher</button>
+                    <button id="btnmem" class="small-button" onclick="member();"><i class="icon icon-user-circle-o">&#xf2be;</i> Member</button>
+                    <button id="qr" class="small-button" onclick="window.location='https://jibri199.github.io/masmu8181';"> <i class="icon icon-qrcode">&#xe801;</i> QR-Scan
+                    </button>
+                </div>
+                <div class="box2" id="infologin">
+                </div>
+                <form autocomplete="off" name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()"
+                    $(endif)>
+                    <input type="hidden" name="dst" value="$(link-orig)" />
+                    <input type="hidden" name="popup" value="true" />
+                    <input class="username" name="username" type="text" value="$(username)" />
+                    <input class="password" name="password" placeholder="Password" type="hidden" />
+
+                 
+            $(if error)<script type="text/javascript">      
+                            var error = "$(error)";
+                            var error1 = "user $(username) has reached uptime limit";
+                            var error2 = "user $(username) has reached traffic limit";
+                            var error3 = "no valid profile found";
+
+                            if (error == error1 || error == error2 || error == error3){
+                                window.location.href = "./expire.html";
+                            } 
+                        </script>
+                        <div class="notice" role="alert">Member atau Voucher Tidak Ditemukan</div>
+            $(endif)
+
+                    <button class="button" type="submit"><i class="icon icon-login">&#xe803;</i> Login</button>
+                </form>
+
+        $(if trial == 'yes')
+            <style>
+            .blink {
+              animation: blink-animation 1s steps(5, start) infinite;
+                -webkit-animation: blink-animation 1s steps(5, start) infinite;
+              }
+              @keyframes blink-animation {
+              to {
+                visibility: hidden;
+                }
+              }
+              @-webkit-keyframes blink-animation {
+              to {
+                visibility: hidden;
+                }
+              }
+            </style>
+                <div class="box"><a style="color:#ffffff">Yang suka Gratisan klik </a><a style="text-decoration: underline; color:#fff; font-weight: bold;" href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">disini</a><a style="color:#ffffff"> nyicip 15 menit</a><span class="blink"><a style="color:#fffe03; font-weight: bold;"> GRATIS</a></span>
+                </div>
+        $(endif)
+
+
+                
+            <div class="box"><marquee class="running-text text-info" direction="left" scrollamount="5">
+                <a style="color:#ffc300;">•••• Voucher Hotspot bisa dibeli di: Warnet Anugerah Banarjoyo - Jaringan Hotspot yang stabil • Manajemen Jaringan yang lebih terstruktur • Pemisahan Bandwidth Games, Browsing dan Download • Paket Data Unlimited atau Tanpa Quota • Full Support
+                •••• Kami juga menyediakan Pembayaran Listik - Pembelian Pulsa HP - Token Listrik - Paket Data DLL •••• Menerima berbagai macam Jasa Printing, Pengadaan Komputer Sekolah (UNBK), Instal Komputer/laptop, Flash HP/Android dan Setting Jaringan Internet, MikroTik, Warnet dengan hasil yang terbaik dan bisa dipertanggungjawabkan ••••
+                </a></marquee>
+                <br>
+                <a style="color:#ffffff">Cp. 62 852 6983 8181</a>
+                </div>
+            </div>
+        </div>
+        <div class="box" style="color:#000;">
+            <i>Copyright &copy; 2019 StarConnection@anugerah.Net</i><br />
+            <i>Powered by <a style="color:#000; text-decoration:underline;" href="https://anugerah.net">Anugerah.Net</a></i>
+        </div>
+
+    <script type="text/javascript">
+        var hostname = window.location.hostname;
+        document.getElementById('title').innerHTML = hostname  + " > login";
+
+        document.login.username.focus();
+
+        var infologin = document.getElementById('infologin');
+        infologin.innerHTML = "Masukkan Kode Voucher kemudian klik login.";
+
+        // login page 2 mode by adi-8181
+        var username = document.login.username;
+        var password = document.login.password;
+
+        username.placeholder = "Kode Voucher";
+
+        // set password = username
+        function setpass() {
+            var user = username.value
+            //user = user.toLowerCase();
+            username.value = user;
+            password.value = user;
+        }
+
+        username.onkeyup = setpass;
+
+        // change to voucher mode
+        function voucher() {
+            username.focus();
+            username.onkeyup = setpass;
+            username.placeholder = "Kode Voucher";
+            username.style = "border-radius:3px;"
+            password.type = "hidden";
+            infologin.innerHTML = "Masukkan Kode Voucher kemudian klik login, Perhatikan Besar Kecil Huruf dan Angka Pada Voucher.";
+        }
+
+        // change to member mode
+        function member() {
+            username.focus();
+            username.onkeyup = "";
+            username.placeholder = "Username";
+            username.style = "border-radius:3px 3px 0px 0px;"
+            password.type = "password";
+            infologin.innerHTML = "Masukkan Username dan Password kemudian klik login, Perhatikan Besar Kecil Huruf dan Angka Pada Voucher.";
+        }
+    </script>
+</body>
+
+</html>
